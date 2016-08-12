@@ -205,11 +205,11 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private boolean hasSetupCompleted() {
-        return CMSettings.Secure.getInt(mContext.getContentResolver(),
-            CMSettings.Secure.CM_SETUP_WIZARD_COMPLETED, 0) != 0;
-    }
-
++    private boolean hasSetupCompleted() {
++        return CMSettings.Secure.getInt(mContext.getContentResolver(),
++            CMSettings.Secure.CM_SETUP_WIZARD_COMPLETED, 0) != 0;
++    }
++
     public boolean handleKeyEvent(KeyEvent event) {
         int scanCode = event.getScanCode();
         boolean isKeySupported = ArrayUtils.contains(sSupportedGestures, scanCode);
@@ -217,11 +217,11 @@ public class KeyHandler implements DeviceKeyHandler {
         if (!isKeySupported && !isSliderModeSupported) {
             return false;
         }
-
-        if (!hasSetupCompleted()) {
-            return false;
-        }
-
+        
++        if (!hasSetupCompleted()) {
++            return false;
++        }
++
         // We only want ACTION_UP event, except FLIP_CAMERA_SCANCODE
         if (scanCode == FLIP_CAMERA_SCANCODE) {
             if (event.getAction() != KeyEvent.ACTION_DOWN) {
